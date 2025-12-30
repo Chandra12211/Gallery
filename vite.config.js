@@ -13,6 +13,10 @@ export default defineConfig(({ mode }) => {
       define: {
         'process.env.NODE_ENV': JSON.stringify('production'),
       },
+      resolve: {
+        // Ensure React is resolved correctly
+        dedupe: ['react', 'react-dom'],
+      },
       build: {
         lib: {
           entry: resolve(__dirname, 'src/plugin/index.tsx'),
@@ -23,15 +27,8 @@ export default defineConfig(({ mode }) => {
         // Inline dynamic imports for IIFE
         inlineDynamicImports: true,
         rollupOptions: {
-          // Externalize React and ReactDOM - they will be loaded from CDN
-          external: ['react', 'react-dom', 'react/jsx-runtime'],
+          // DON'T externalize React - bundle it inside
           output: {
-            // Global variable names for externalized dependencies
-            globals: {
-              'react': 'React',
-              'react-dom': 'ReactDOM',
-              'react/jsx-runtime': 'React',
-            },
             // Ensure styles are extracted with correct name
             assetFileNames: (assetInfo) => {
               if (assetInfo.name?.endsWith('.css')) {
@@ -39,23 +36,25 @@ export default defineConfig(({ mode }) => {
               }
               return assetInfo.name || '[name].[ext]'
             },
-            // Export only named exports (not default)
+            // Export only named exports
             exports: 'named',
+            // Ensure proper global scope
+            extend: true,
           },
         },
         // Output to dist folder
         outDir: 'dist',
         // Generate sourcemaps for debugging
-        sourcemap: true,
+        sourcemap: false,
         // Minify for production
         minify: 'terser',
         terserOptions: {
           compress: {
-            drop_console: true,
+            drop_console: false, // Keep console for debugging
             drop_debugger: true,
           },
         },
-        // Don't empty the output directory (in case we have other builds)
+        // Empty the output directory
         emptyOutDir: true,
         // CSS code splitting disabled for single CSS file
         cssCodeSplit: false,
