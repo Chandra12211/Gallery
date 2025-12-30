@@ -60,6 +60,9 @@ const SocialMedia: React.FC<SocialMediaProps> = ({
   domain,
   onPostClick 
 }) => {
+
+  console.log(uid, domain);
+
   const observerRef = useRef<IntersectionObserver | null>(null);
   const loadMoreRef = useRef<HTMLDivElement>(null);
   const [posts, setPosts] = useState<SocialPost[]>(initialPosts || []);

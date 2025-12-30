@@ -10,20 +10,32 @@
     <div id="gallery"></div>
     <script src="dist/react-gallery.min.js"></script>
     <script>
-        ReactGallery.initGallery("#gallery", {
-            type: "gallery",
-            onPostClick: function(post) {
-                ReactGallery.initGallery("#gallery", {
-                    type: "single", 
-                    post: post,
-                    uid: 31588,
-                    domain: "https://api.loanofficersupport.com", 
-                    onBackClick: function() {
-                        ReactGallery.initGallery("#gallery", { type: "gallery" });
-                    }
-                });
-            }
-        });
+        var config = {
+            uid: 31588,
+            domain: "https://api.loanofficersupport.com"
+        };
+
+        function showGallery() {
+            ReactGallery.initGallery("#gallery", {
+                type: "gallery",
+                uid: config.uid,
+                domain: config.domain,
+                onPostClick: function(post) {
+                    ReactGallery.initGallery("#gallery", {
+                        type: "single", 
+                        post: post,
+                        uid: config.uid,
+                        domain: config.domain, 
+                        onBackClick: function() {
+                            showGallery();
+                        }
+                    });
+                }
+            });
+        }
+
+        // Start
+        showGallery();
     </script>
 </body>
 </html>

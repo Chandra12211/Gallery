@@ -57,6 +57,8 @@ const SingleSocialMedia: React.FC<SingleSocialMediaProps> = ({
   onPostClick,
   onBackClick
 }) => {
+
+  console.log(uid, domain);
   const [post, setPost] = useState<SocialPost | null>(initialPost || null);
   const [relatedPosts, setRelatedPosts] = useState<SocialPost[]>([]);
   const [loading, setLoading] = useState(!initialPost);

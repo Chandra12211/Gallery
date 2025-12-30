@@ -49,7 +49,9 @@ function initGallery(selector: string, options: GalleryOptions) {
   roots.set(selector, root);
 
   if (options.type === "single") {
+      console.log("single", options.uid, options.domain);
     root.render(
+
       <React.StrictMode>
         <SingleSocialMedia
           postId={options.postId}
@@ -63,6 +65,8 @@ function initGallery(selector: string, options: GalleryOptions) {
       </React.StrictMode>
     );
   } else {
+    console.log("single", options.uid, options.domain);
+
     root.render(
       <React.StrictMode>
         <SocialMedia
