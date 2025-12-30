@@ -10,6 +10,14 @@
     padding: 0;
     box-sizing: border-box;
   }
+
+  #gallery{
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+  }
 /* Page Container */
 .gallery-page {
   min-height: 100vh;
@@ -185,7 +193,8 @@
 .play-button {
   background-color: rgba(147, 51, 234, 0.9);
   border-radius: 50%;
-  padding: 0.75rem;
+  padding: 0.5rem;
+  height: 19px;
   transition: transform 0.3s ease;
 }
 
@@ -194,8 +203,8 @@
 }
 
 .play-icon {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.2rem;
+  height: 1.2rem;
   color: #ffffff;
 }
 
@@ -699,13 +708,14 @@
 
 .related-play-button {
   background-color: rgba(147, 51, 234, 0.9);
-  border-radius: 50%;
-  padding: 0.25rem;
+  border-radius: 100%;
+  padding: 6px;
+  height: 20px;
 }
 
 .related-play-icon {
-  width: 0.75rem;
-  height: 0.75rem;
+  width: 24px;
+  height: 16px;
   color: #ffffff;
 }
 
