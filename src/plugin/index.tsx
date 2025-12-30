@@ -18,6 +18,8 @@ export interface GalleryOptions {
   posts?: SocialPost[];
   // Common options
   baseUrl?: string;
+  uid?: number | string;
+  domain?: string;
   onPostClick?: (post: SocialPost) => void;
   onBackClick?: () => void;
 }
@@ -53,6 +55,8 @@ function initGallery(selector: string, options: GalleryOptions) {
           postId={options.postId}
           post={options.post}
           baseUrl={options.baseUrl}
+          uid={options.uid}
+          domain={options.domain}
           onPostClick={options.onPostClick}
           onBackClick={options.onBackClick}
         />
@@ -64,6 +68,8 @@ function initGallery(selector: string, options: GalleryOptions) {
         <SocialMedia
           initialPosts={options.posts}
           baseUrl={options.baseUrl}
+          uid={options.uid}
+          domain={options.domain}
           onPostClick={options.onPostClick}
         />
       </React.StrictMode>

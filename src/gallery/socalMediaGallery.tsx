@@ -45,6 +45,10 @@ export interface SocialMediaProps {
   initialPosts?: SocialPost[];
   // Base URL for API calls (optional)
   baseUrl?: string;
+  // User ID for API calls
+  uid?: number | string;
+  // Domain/API base URL
+  domain?: string;
   // Callback when a post is clicked
   onPostClick?: (post: SocialPost) => void;
 }
@@ -52,6 +56,8 @@ export interface SocialMediaProps {
 const SocialMedia: React.FC<SocialMediaProps> = ({ 
   initialPosts, 
   baseUrl,
+  uid,
+  domain,
   onPostClick 
 }) => {
   const observerRef = useRef<IntersectionObserver | null>(null);
@@ -119,6 +125,8 @@ const SocialMedia: React.FC<SocialMediaProps> = ({
         keyword: searchTerm,
         platform: selectedPlatform !== 'all' ? selectedPlatform : '',
         date_filter: dateFilter,
+        uid: uid,
+        domain: domain,
       });
 
       if (response.status === 'success') {

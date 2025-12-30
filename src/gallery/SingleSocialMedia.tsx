@@ -39,15 +39,12 @@ export interface SocialPost {
 }
 
 export interface SingleSocialMediaProps {
-  // Post ID to fetch (if post not provided)
   postId?: number | string;
-  // Pre-loaded post data (optional)
   post?: SocialPost;
-  // Base URL for API calls (optional)
   baseUrl?: string;
-  // Callback when a related post is clicked
+  uid?: number | string;
+  domain?: string;
   onPostClick?: (post: SocialPost) => void;
-  // Callback when back button is clicked
   onBackClick?: () => void;
 }
 
@@ -55,6 +52,8 @@ const SingleSocialMedia: React.FC<SingleSocialMediaProps> = ({
   postId,
   post: initialPost,
   baseUrl,
+  uid,
+  domain,
   onPostClick,
   onBackClick
 }) => {
@@ -72,7 +71,6 @@ const SingleSocialMedia: React.FC<SingleSocialMediaProps> = ({
   const relatedScrollContainerRef = useRef<HTMLDivElement>(null);
   const relatedCurrentPageRef = useRef(0);
   const tiktokIframeRef = useRef<HTMLIFrameElement>(null);
-
   const currentId = postId?.toString() || initialPost?.id?.toString();
 
   const fetchRelatedPosts = useCallback(async (reset: boolean = false) => {
@@ -93,6 +91,8 @@ const SingleSocialMedia: React.FC<SingleSocialMediaProps> = ({
         keyword: '',
         platform: '',
         date_filter: '',
+        uid: uid,
+        domain: domain,
       });
 
       if (response?.status === 'success') {
@@ -184,6 +184,8 @@ const SingleSocialMedia: React.FC<SingleSocialMediaProps> = ({
         keyword: currentId,
         platform: '',
         date_filter: '',
+        uid: uid,
+        domain: domain,
       });
 
       if (response?.status === 'success' && response?.data && response.data.length > 0) {
